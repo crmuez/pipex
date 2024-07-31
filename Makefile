@@ -6,17 +6,17 @@
 #    By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 20:03:46 by crmunoz-          #+#    #+#              #
-#    Updated: 2024/07/30 21:32:56 by crmunoz-         ###   ########.fr        #
+#    Updated: 2024/07/31 16:32:18 by crmunoz-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME	:= pipex
 CC		:= gcc
-FLAGS	:= -Wall -Wextra -Werror 
+#FLAGS	:= -Wall -Wextra -Werror 
 
-SRCS	:=	pipex.c \
-			utils/ft_strlen.c	utils/ft_split.c utils/ft_strlcat.c utils/ft_strlcpy.c utils/ft_strnstr.c utils/ft_substr.c \
+SRCS	:=	pipex.c get_path.c \
+			utils/ft_strlen.c	utils/ft_split.c utils/ft_strlcat.c utils/ft_strjoin.c utils/ft_strnstr.c utils/ft_substr.c \
 
 OBJS	:= $(SRCS:.c=.o)
 
