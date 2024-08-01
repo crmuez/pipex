@@ -1,47 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 12:03:25 by crmunoz-          #+#    #+#             */
-/*   Updated: 2024/08/01 13:16:10 by crmunoz-         ###   ########.fr       */
+/*   Created: 2023/12/06 15:28:41 by crmunoz-          #+#    #+#             */
+/*   Updated: 2024/08/01 13:00:09 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-size_t	ft_strlen(char *s)
+char	*ft_strdup(char *s1)
 {
-	size_t	count;
-	char	*schar;
-
-	count = 0;
-	schar = (char *) s;
-	while (schar[count] != '\0')
-		count++;
-	return (count);
-}
-
-char	*ft_strstr(char *str, char *to_find)
-{
-	int	i;
-	int	j;
+	int		i;
+	char	*dest;
+	int		s1len;
 
 	i = 0;
-	j = 0;
-	if (to_find[i] == '\0')
-		return (str);
-	while (str[i] != '\0')
+	s1len = ft_strlen(s1);
+	dest = malloc((sizeof(char) * s1len) + 1);
+	if (dest == NULL)
+		return (0);
+	while (i < s1len)
 	{
-		j = 0;
-		if (str[i] == to_find[j])
-			while (str[i + j] == to_find[j] && to_find[j] != '\0')
-				j++;
-		if (to_find[j] == '\0')
-			return (str + i);
+		dest[i] = s1[i];
 		i++;
 	}
-	return (0);
+	dest[i] = '\0';
+	return (dest);
 }

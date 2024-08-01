@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:55:19 by crmunoz-          #+#    #+#             */
-/*   Updated: 2024/07/31 19:16:33 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2024/08/01 13:38:44 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,16 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
-size_t	ft_strlen(char *s);
 size_t	ft_strlcat(char *dst, char *src, size_t dstsize);
+size_t	ft_strlen(char *s);
+char	*ft_strstr(char *str, char *to_find);
+char	*ft_strdup(char *s1);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char *s, unsigned int start, size_t len);
 char	*ft_strnstr(char *stack, char *needle, size_t len);
 char	**ft_split(char *s, char c);
 char	**get_path(char **env);
-char	*command(char	**argv, char **pathitos);
+char	*command(char **pathitos, char **arg);
+char	**split_awk(char **argv);
 
 #endif

@@ -6,32 +6,13 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 19:32:04 by crmunoz-          #+#    #+#             */
-/*   Updated: 2024/07/31 20:29:39 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2024/08/01 13:38:36 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*command(char **pathitos, char **arg)
-{
-	int		i;
-	char	*aux;
-	char	*command;
-	int		pid;
-
-	i = 1;
-	aux = ft_strjoin("/", arg[0]);
-	while (pathitos[i])
-	{
-		command = ft_strjoin(pathitos[i], aux);
-		if (!access(command, X_OK))
-			break ;
-		i++;
-	}
-	return (command);
-}
-
-void	die_first(char	**pathitos, char	**argv, int	fd[2])
+void	die_first(char	**pathitos, char	**argv, int fd[2])
 {
 	int		pid;
 	char	*command1;
@@ -48,6 +29,7 @@ void	die_first(char	**pathitos, char	**argv, int	fd[2])
 		dup2(input, 0);
 		close(fd[0]);
 		close(input);
+		close(fd[1]);
 		execve(command1, arg1, NULL);
 		exit (127);
 	}
@@ -55,22 +37,26 @@ void	die_first(char	**pathitos, char	**argv, int	fd[2])
 		return ;
 }
 
-void	die_second(char	**pathitos, char	**argv, int	fd[2])
+void	die_second(char	**pathitos, char	**argv, int fd[2])
 {
 	char	**arg2;
 	char	*command2;
 	int		pid;
 	int		output;
 
-	arg2 = ft_split(argv[2], ' ');
+	if (argv[2][0] != 'a' && argv[2][1] != 'w' && argv[2][2] != 'k')
+		arg2 = ft_split(argv[2], ' ');
+	else
+		arg2 = split_awk(argv);
 	command2 = command(pathitos, arg2);
 	pid = fork();
-	output = open("output", O_RDWR | O_CREAT, O_TRUNC, 0644);
+	output = open("output", O_RDWR | O_CREAT | O_TRUNC, 0666);
 	if (pid == 0)
 	{
 		dup2(output, 1);
 		dup2(fd[0], 0);
 		close(fd[1]);
+		close(fd[0]);
 		execve(command2, arg2, NULL);
 		exit (127);
 	}
@@ -92,9 +78,9 @@ int	main(int argc, char **argv, char **env)
 	printf("%s\n", command);
 
 	i = 0;
-	while (pathitos[i])
+	while (arg[i])
 	{
-		printf("%s\n", pathitos[i]);
+		printf("%s\n", arg[i]);
 		i++;
 	}
 
