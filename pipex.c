@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 19:32:04 by crmunoz-          #+#    #+#             */
-/*   Updated: 2024/08/01 13:38:36 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2024/08/01 19:19:00 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	die_first(char	**pathitos, char	**argv, int fd[2])
 	char	**arg1;
 	int		input;
 
-	arg1 = ft_split(argv[1], ' ');
+	arg1 = awk_split(argv[2]);
 	command1 = command(pathitos, arg1);
 	pid = fork();
-	input = open("pipex.c", O_RDONLY);
+	input = open(argv[1], O_RDONLY);
 	if (pid == 0)
 	{
 		dup2 (fd[1], 1);
@@ -31,6 +31,8 @@ void	die_first(char	**pathitos, char	**argv, int fd[2])
 		close(input);
 		close(fd[1]);
 		execve(command1, arg1, NULL);
+		free_args(arg1);
+		free_args(&command1);
 		exit (127);
 	}
 	else
@@ -44,13 +46,10 @@ void	die_second(char	**pathitos, char	**argv, int fd[2])
 	int		pid;
 	int		output;
 
-	if (argv[2][0] != 'a' && argv[2][1] != 'w' && argv[2][2] != 'k')
-		arg2 = ft_split(argv[2], ' ');
-	else
-		arg2 = split_awk(argv);
+	arg2 = awk_split(argv[3]);
 	command2 = command(pathitos, arg2);
 	pid = fork();
-	output = open("output", O_RDWR | O_CREAT | O_TRUNC, 0666);
+	output = open(argv[4], O_RDWR | O_CREAT | O_TRUNC, 0666);
 	if (pid == 0)
 	{
 		dup2(output, 1);
@@ -58,6 +57,8 @@ void	die_second(char	**pathitos, char	**argv, int fd[2])
 		close(fd[1]);
 		close(fd[0]);
 		execve(command2, arg2, NULL);
+		free_args(arg2);
+		free_args(&command2);
 		exit (127);
 	}
 	else
@@ -69,6 +70,8 @@ int	main(int argc, char **argv, char **env)
 	char	**pathitos;
 	int		fd[2];
 
+	if (argc < 1)
+		return (0);
 	pipe(fd);
 	pathitos = get_path(env);
 	die_first(pathitos, argv, fd);

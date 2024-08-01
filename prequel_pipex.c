@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:48:20 by crmunoz-          #+#    #+#             */
-/*   Updated: 2024/08/01 13:51:36 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2024/08/01 19:18:35 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,68 @@ char	*command(char **pathitos, char **arg)
 	return (command);
 }
 
+char	**awk_split(char *argv)
+{
+	char	**awks;
+	char	**flags;
+	char	**final_split_arg;
+	int		i;
+	int		len;
+
+	len = 1;
+	i = 0;
+	awks = ft_split(argv, '\'');
+	flags = ft_split(awks[0], ' ');
+	while (flags[len])
+		len++;
+	if (awks[1])
+		len++;
+	final_split_arg = malloc(sizeof (char *) * len);
+	while (flags[i])
+	{
+		final_split_arg[i] = ft_strdup(flags[i]);
+		i++;
+	}
+	if (awks[1])
+		final_split_arg[i] = ft_strdup(awks[1]);
+	final_split_arg[++i] = NULL;
+	free_arrays(awks, flags);
+	return (final_split_arg);
+}
+
+void	free_arrays(char **awks, char **flags)
+{
+	int	i;
+
+	i = 0;
+	while (awks[i])
+	{
+		free(awks[i]);
+		i++;
+	}
+	while (flags[i])
+	{
+		free(flags[i]);
+		i++;
+	}
+	if (awks)
+		free(awks);
+	if (flags)
+		free(flags);
+}
+
+void	free_args(char	**args)
+{
+	int	i;
+
+	i = 0;
+	while (args[i])
+	{
+		free(args[i]);
+		i++;
+	}
+}
+/*
 char	*remove_awk(char **argv)
 {
 	size_t	len;
@@ -100,3 +162,4 @@ char	**split_awk(char **argv)
 	awk[1] = remove_awk(argv);
 	return (awk);
 }
+*/
