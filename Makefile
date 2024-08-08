@@ -6,14 +6,14 @@
 #    By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 20:03:46 by crmunoz-          #+#    #+#              #
-#    Updated: 2024/08/01 19:10:59 by crmunoz-         ###   ########.fr        #
+#    Updated: 2024/08/08 20:16:48 by crmunoz-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME	:= pipex
 CC		:= gcc
-FLAGS	:= -Wall -Wextra -Werror
+FLAGS	:= -Wall -Wextra -Werror \
 
 SRCS	:=	pipex.c prequel_pipex.c \
 			utils/ft_strlen.c utils/ft_strdup.c utils/ft_split.c utils/ft_strlcat.c utils/ft_strjoin.c utils/ft_strnstr.c utils/ft_substr.c \

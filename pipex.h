@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:55:19 by crmunoz-          #+#    #+#             */
-/*   Updated: 2024/08/01 19:09:24 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2024/08/08 17:17:32 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strnstr(char *stack, char *needle, size_t len);
 char	**ft_split(char *s, char c);
 char	**get_path(char **env);
 char	*command(char **pathitos, char **arg);
-char	**awk_split(char *argv);
+char	**awk_split(char *argv, int i, int len);
 void	free_args(char	**args);
 void	free_arrays(char **awks, char **flags);
 
