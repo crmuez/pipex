@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:48:20 by crmunoz-          #+#    #+#             */
-/*   Updated: 2024/08/12 18:46:02 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2024/08/12 19:30:47 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,4 +124,6 @@ void	free_args(char	**args)
 		free(args[i]);
 		i++;
 	}
+	if (args)
+		free(args);
 }
