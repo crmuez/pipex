@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:55:19 by crmunoz-          #+#    #+#             */
-/*   Updated: 2024/08/08 17:17:32 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2024/08/12 17:18:17 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stddef.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <sys/wait.h>
 
 size_t	ft_strlcat(char *dst, char *src, size_t dstsize);
 size_t	ft_strlen(char *s);
