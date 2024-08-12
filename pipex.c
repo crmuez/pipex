@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 19:32:04 by crmunoz-          #+#    #+#             */
-/*   Updated: 2024/08/12 18:37:35 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2024/08/12 19:01:18 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,13 @@ int	main(int argc, char **argv, char **env)
 	int		pid2;
 
 	if (argc != 5)
+	{
+		if (argc < 5)
+			write(2, "too few arguments\n", 18);
+		else if (argc > 5)
+			write(2, "too many arguments\n", 19);
 		exit(1);
+	}
 	pipe(fd);
 	pathitos = get_path(env);
 	pid1 = fork();
@@ -81,14 +87,3 @@ int	main(int argc, char **argv, char **env)
 	wait(NULL);
 	free_args(pathitos);
 }
-/*
-	printf("%s\n", command);
-
-	i = 0;
-	while (arg[i])
-	{
-		printf("%s\n", arg[i]);
-		i++;
-	}
-
-*/
